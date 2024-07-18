@@ -9,7 +9,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,5 +44,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return str_ends_with($this->email, '@admin.com') && $this->hasVerifiedEmail();
     }
 }
