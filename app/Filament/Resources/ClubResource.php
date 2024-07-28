@@ -26,8 +26,10 @@ class ClubResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('parent_id')
-                    ->numeric(),
+                Forms\Components\Select::make('parent_id')
+                    ->relationship('parent', 'name')
+                    ->disabled()
+                    ->label('Parent Club'),
             ]);
     }
 
@@ -35,8 +37,8 @@ class ClubResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('parent_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('parent.name')
+                    ->label('Parent Club')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),

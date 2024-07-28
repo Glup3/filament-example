@@ -26,7 +26,7 @@ class ChildClubsRelationManager extends RelationManager
                 Forms\Components\Select::make('parent_id')
                     ->label('Parent Club')
                     ->relationship('parent', 'name')
-                    ->nullable(),
+                    ->disabled(),
             ]);
     }
 
