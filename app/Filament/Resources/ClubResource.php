@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ClubResource\Pages;
+use App\Filament\Resources\ClubResource\RelationManagers;
 use App\Models\Club;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -52,6 +53,7 @@ class ClubResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -64,7 +66,7 @@ class ClubResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ChildClubsRelationManager::class,
         ];
     }
 
@@ -73,6 +75,7 @@ class ClubResource extends Resource
         return [
             'index' => Pages\ListClubs::route('/'),
             'create' => Pages\CreateClub::route('/create'),
+            'view' => Pages\ViewClub::route('/{record}'),
             'edit' => Pages\EditClub::route('/{record}/edit'),
         ];
     }
