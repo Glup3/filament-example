@@ -18,7 +18,17 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         $topClubs->each(function ($topClub) {
-            Club::factory()->count(3)->withParent($topClub->id)->create();
+            $clubs2 = Club::factory()
+                ->count(3)
+                ->withParent($topClub->id)
+                ->create();
+
+            $clubs2->each(function ($club2) {
+                Club::factory()
+                    ->count(15)
+                    ->withParent($club2->id)
+                    ->create();
+            });
         });
     }
 }
